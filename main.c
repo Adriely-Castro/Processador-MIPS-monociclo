@@ -5,7 +5,7 @@
 #define MAX_INSTRUCOES 100
 #define MAX_LINE_LENGTH 50
 
-// Estrutura para representar uma instrução
+// Estrutura para armazenar estruturas em Assembly e seus sinais de controle
 typedef struct {
     char assembly[MAX_LINE_LENGTH];
     char binario[33];
@@ -15,7 +15,7 @@ typedef struct {
 Instrucao instrucoes[MAX_INSTRUCOES];
 int instrucao_count = 0;
 
-// Função para definir sinais de controle e saída formatada
+// Função para definir sinais de controle com base na instrução assembly
 void set_sinais_de_controle(const char *assembly, char *sinais_de_controle) {
     if (strncmp(assembly, "addi", 4) == 0) {
         strcpy(sinais_de_controle, "ALUOp: 10; RegDst: 0; ALUScr: 1; MemtoReg: 0; Reg-Write: 1; Mem-Read: 0; Mem-Write: 0; Branch: 0;\n");
@@ -36,7 +36,7 @@ void set_sinais_de_controle(const char *assembly, char *sinais_de_controle) {
     }
 }
 
-// Função para ler um arquivo e processar instruções
+// Função para ler o arquivo
 void ler_arquivo(const char *nomearquivo) {
     FILE *file = fopen(nomearquivo, "r");
     if (!file) {
